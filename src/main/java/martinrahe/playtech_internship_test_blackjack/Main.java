@@ -16,10 +16,13 @@ public class Main {
             System.exit(0);
         }
         List<String[]> faultyMoves = Simulate.simulateGame(gameData);
-        System.out.println("Faulty moves:");
-        for (String[] g : faultyMoves) {
-            System.out.println(Arrays.toString(g));
+        try {
+            WriteGameData.writeGameData(faultyMoves);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(0);
         }
+
 
     }
 }
