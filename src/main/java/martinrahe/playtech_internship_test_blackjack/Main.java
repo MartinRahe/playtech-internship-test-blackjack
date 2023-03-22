@@ -2,14 +2,23 @@ package main.java.martinrahe.playtech_internship_test_blackjack;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         String fileName = "game_data.txt";
+        List<String[]> gameData = null;
         try {
-            ReadGameData.readGameData(fileName);
+            gameData = ReadGameData.readGameData(fileName);
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(0);
+        }
+        List<String[]> faultyMoves = Simulate.simulateGame(gameData);
+        System.out.println("Faulty moves:");
+        for (String[] g : faultyMoves) {
+            System.out.println(Arrays.toString(g));
         }
 
     }
