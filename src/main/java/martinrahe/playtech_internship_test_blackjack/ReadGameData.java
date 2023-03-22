@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class ReadGameData {
-    public static void readGameData(String fileName) throws IOException {
+    public static List<String[]> readGameData(String fileName) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("resources/" + fileName));
         String line;
         List<String[]> gameData = new ArrayList<>();
@@ -19,13 +19,11 @@ public class ReadGameData {
         }
         gameData.sort((o1, o2) -> { //sort the array
             if (!o1[1].equals(o2[1])) { //sort by game ID
-                return o1[1].compareTo(o2[1]);
+                return Integer.parseInt(o1[1]) - Integer.parseInt(o2[1]);
             }
-            return o1[0].compareTo(o2[0]); //sort by time
+            return Integer.parseInt(o1[0]) - Integer.parseInt(o2[0]); //sort by time
         });
 
-        for (String[] g : gameData) {
-            System.out.println(Arrays.toString(g));
-        }
+        return gameData;
     }
 }
