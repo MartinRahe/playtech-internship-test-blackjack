@@ -24,24 +24,21 @@ public class Simulate {
             }
             faultFoundAtId = false;
 
-            if (gameID != previousID) {
-                allowedActions.clear();
-                allowedActions.add("P Joined");
-                previousID = gameID;
-            }
-
             String playerCards = g[5].strip();
             String dealerCards = g[4].strip();
             int playerSum = computeCardSum(playerCards);
             int dealerSum = computeCardSum(dealerCards);
-            if (playerSum > 21) {
+
+            if (gameID != previousID) {
+                allowedActions.clear();
+                allowedActions.add("P Joined");
+                previousID = gameID;
+            } else if (playerSum > 21) {
                 allowedActions.clear();
                 allowedActions.add("P Lose");
                 allowedActions.add("P Left");
                 allowedActions.add("D Redeal");
-            }
-
-            if (dealerSum > 21) {
+            } else if (dealerSum > 21) {
                 allowedActions.clear();
                 allowedActions.add("P Win");
                 allowedActions.add("P Left");
